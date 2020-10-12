@@ -36,11 +36,14 @@ export default {
       products: state => state.products.all
     }),
 
-    ...mapGetters(['productIsInStock'])
+    ...mapGetters('products', ['productIsInStock'])
   },
 
   methods: {
-    ...mapActions(['fetchProducts', 'addProductToCart'])
+    ...mapActions({
+      fetchProducts: 'products/fetchProducts',
+      addProductToCart: 'cart/addProductToCart'
+    })
   }
 }
 </script>
