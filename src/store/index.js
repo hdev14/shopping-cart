@@ -13,6 +13,13 @@ export default new Vuex.Store({
   getters: {
     availableProducts (state, getters) {
       return state.products.filter(p => p.inventory > 0)
+    },
+
+    cartProducts (state, getters) {
+      return state.cart.map(item => {
+        const product = state.products.find(p => p.id === item.id)
+        return { ...item, ...product }
+      })
     }
   },
 
