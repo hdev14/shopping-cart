@@ -32,7 +32,9 @@ export default {
   },
 
   computed: {
-    ...mapState(['products']),
+    ...mapState({
+      products: state => state.products.all
+    }),
 
     ...mapGetters(['productIsInStock'])
   },
