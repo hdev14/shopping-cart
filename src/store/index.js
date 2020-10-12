@@ -11,15 +11,19 @@ export default new Vuex.Store({
   },
 
   getters: {
-    availableProducts (state, getters) {
+    availableProducts (state, _) {
       return state.products.filter(p => p.inventory > 0)
     },
 
-    cartProducts (state, getters) {
+    cartProducts (state, _) {
       return state.cart.map(item => {
         const product = state.products.find(p => p.id === item.id)
         return { ...item, ...product }
       })
+    },
+
+    cartTotal (state, getters) {
+      return getters.cartProducts.reduce((total, p) => total + p.quantity * p.price, 0)
     }
   },
 
@@ -62,7 +66,7 @@ export default new Vuex.Store({
       })
     },
 
-    incrementItemQuantity (state, cartItem) {
+    incrementItemQuantity (_, cartItem) {
       cartItem.quantity++
     },
 
