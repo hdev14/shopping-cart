@@ -25,6 +25,10 @@ export default new Vuex.Store({
 
     cartTotal (state, getters) {
       return getters.cartProducts.reduce((total, p) => total + p.quantity * p.price, 0)
+    },
+
+    productIsInStock () {
+      return (product) => product.inventory > 0
     }
   },
 
@@ -38,8 +42,8 @@ export default new Vuex.Store({
       })
     },
 
-    addProductToCart ({ state, commit }, product) {
-      if (!(product.inventory > 0)) {
+    addProductToCart ({ state, commit, getters }, product) {
+      if (!getters.productIsInStock(product)) {
         return
       }
 
