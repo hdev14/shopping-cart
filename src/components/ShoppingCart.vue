@@ -3,9 +3,9 @@
     <h1>Shopping Cart</h1>
     <ul>
       <li v-for="product in products" :key="product.id">
-        {{ product.title }} - {{ product.price }} - {{ product.quantity }}
+        {{ product.title }} - {{ product.price | currency }} - {{ product.quantity }}
       </li>
-      <span>TOTAL: {{ total }}</span>
+      <span>TOTAL: {{ total | currency }}</span>
     </ul>
   </div>
 </template>
